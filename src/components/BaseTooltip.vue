@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="['custom-relative', active]">
+    <div :class="['custom-relative', active]" :style="`--orange-bg: url(${getImgUrl('images/possibilities/possibilities-circle/orange.png')}); --blue-bg: url(${getImgUrl('images/possibilities/possibilities-circle/blue.png')})`">
       <slot />
     </div>
     <div :class="propsClass">
@@ -23,7 +23,8 @@ export default {
     desc1: String,
     desc2: String,
     propsClass: [String, { active: Boolean }],
-    active: { active: Boolean }
+    active: { active: Boolean },
+    getImgUrl: Function,
   },
   methods: {
     handleClose () {

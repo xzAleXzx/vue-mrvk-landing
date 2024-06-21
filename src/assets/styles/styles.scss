@@ -1151,12 +1151,12 @@ body {
         z-index: 6;
         width: 100px;
         height: 132px;
-        background: url("src/assets/images/possibilities/possibilities-circle/orange.png") no-repeat;
+        background: var(--orange-bg) no-repeat;
         background-size: contain;
         cursor: pointer;
 
         &:hover, &.active {
-            background: url("src/assets/images/possibilities/possibilities-circle/blue.png") no-repeat;
+            background: var(--blue-bg) no-repeat;
             background-size: contain;
         }
     }
@@ -1810,10 +1810,10 @@ body {
             width: 50px;
             height: 50px;
             cursor: pointer;
-            background: url("src/assets/images/arrow-up.svg") no-repeat content-box;
+            background: var(--arrow-up) no-repeat content-box;
 
             &:hover {
-                background: url("src/assets/images/arrow-up-hover.svg") no-repeat content-box;
+                background: var(--arrow-up-hover) no-repeat content-box;
             }
         }
     }
@@ -1949,7 +1949,7 @@ body {
             -webkit-appearance: none;
             appearance: none;
             background-color: $white;
-            background: url("src/assets/images/dropdown-arrow.svg");
+            background-image: var(--dropdown-arrow);
             background-repeat: no-repeat, repeat;
             background-position: right 1.5em top 50%, 0 0;
         }

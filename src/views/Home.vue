@@ -308,6 +308,7 @@
               :desc1="item.desc1"
               :desc2="item.desc2"
               :active="{'active': activeIndex === index }"
+              :get-img-url="getImgUrl"
               @close="handleClose"
               @click="setActive(index)"
             >
@@ -528,7 +529,7 @@
             </a>
           </div>
         </div>
-        <a href="#" class="arrow-up"></a>
+        <a href="#" class="arrow-up" :style="`--arrow-up: url(${getImgUrl('images/arrow-up.svg')}); --arrow-up-hover: url(${getImgUrl('images/arrow-up-hover.svg')})`"></a>
       </div>
       <div id="footer" class="container-fluid p-0">
         <pre />
@@ -565,7 +566,7 @@
             </p>
           </div>
           <div :class="['number', errors.includes('number') ? 'error-field' : '']">
-            <select>
+            <select :style="`--dropdown-arrow: url(${getImgUrl('images/dropdown-arrow.svg')})`">
               <option>+7</option>
               <option>+89</option>
             </select>
