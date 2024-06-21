@@ -98,7 +98,7 @@
           class="swiper-retail"
         >
           <swiper-slide v-for="(retailer, key) in retailers" :key="key" class="mrvk-retail-card">
-            <img class="retail-img" :src="`${retailer.srcImg}`" alt="retailerImg" />
+            <img class="retail-img" :src="`${getImgUrl(retailer.srcImg)}`" alt="retailerImg" />
             <div class="retailer-title">
               {{ retailer.title }}
             </div>
@@ -160,7 +160,7 @@
                 <p>{{ usage.slide.desc1 }}</p>
                 <span>{{ usage.id }}</span>
               </div>
-              <img class="usage-img" :src="`${usage.slide.srcImg}`" alt="usageImg">
+              <img class="usage-img" :src="`${getImgUrl(usage.slide.srcImg)}`" alt="usageImg">
               <div class="slide-desc2">
                 {{ usage.slide.desc2 }}
               </div>
@@ -311,7 +311,7 @@
               @close="handleClose"
               @click="setActive(index)"
             >
-              <img :class="`${item.name}-img`" :src="`${item.imgSrc}`" :alt="`${item.name}`">
+              <img :class="`${item.name}-img`" :src="`${getImgUrl(item.imgSrc)}`" :alt="`${item.name}`">
             </BaseTooltip>
           </div>
           <div class="circle-description">
@@ -331,8 +331,8 @@
       </div>
       <div class="difficulties-block">
         <div class="difficulties-header">
-          <div v-for="role in roles">
-            <span @click="handleSelectRole" :class="{'active': selectedRole === role}" :key="role">{{ role }}</span>
+          <div v-for="role in roles" :key="role">
+            <span @click="handleSelectRole" :class="{'active': selectedRole === role}">{{ role }}</span>
           </div>
         </div>
         <pre />
@@ -362,7 +362,7 @@
           class="swiper-account"
         >
           <swiper-slide v-for="(acc, key) in accountSliderSrcs" :key="key" class="mrvk-account-card">
-            <img class="account-img" :src="`${acc.imgSrc}`" alt="retailerImg" />
+            <img class="account-img" :src="`${getImgUrl(acc.imgSrc)}`" alt="retailerImg" />
           </swiper-slide>
         </swiper>
 
@@ -646,22 +646,22 @@ const retailers = [
   {
     title: 'Супермаркеты',
     subtitle: 'и продуктовые магазины',
-    srcImg: 'src/assets/images/retail-slider/supermarket.png'
+    srcImg: 'images/retail-slider/supermarket.png'
   },
   {
     title: 'Кафе',
     subtitle: 'рестораны и фастфуд',
-    srcImg: 'src/assets/images/retail-slider/cafe.png'
+    srcImg: 'images/retail-slider/cafe.png'
   },
   {
     title: 'Кулинарии',
     subtitle: 'пекарни и кондитерские',
-    srcImg: 'src/assets/images/retail-slider/cookery.png'
+    srcImg: 'images/retail-slider/cookery.png'
   },
   {
     title: 'Аптеки',
     subtitle: 'фармцевтические компании',
-    srcImg: 'src/assets/images/retail-slider/pharmacy.png'
+    srcImg: 'images/retail-slider/pharmacy.png'
   }
 ]
 
@@ -672,7 +672,7 @@ const usages = [
     description: 'Создание чек-листов под ваши задачи',
     slide: {
       desc1: 'Создавайте чек-листы для проверки любых процессов в вашей компании',
-      srcImg: 'src/assets/images/usage-slider/01.png',
+      srcImg: 'images/usage-slider/01.png',
       desc2: 'Удобный и гибкий конструктор чек-листов подойдет под любые задачи'
     }
   },
@@ -682,7 +682,7 @@ const usages = [
     description: 'Выполнение проверок торговой сети по чек-листам',
     slide: {
       desc1: 'Назначайте проверки ваших точек по одному или нескольким чек-листам',
-      srcImg: 'src/assets/images/usage-slider/02.png',
+      srcImg: 'images/usage-slider/02.png',
       desc2: 'Каждый отчет о проверке подтверждается фотографиями и контролируется по GPS'
     }
   },
@@ -692,7 +692,7 @@ const usages = [
     description: 'Исправление нарушений и создание задач сотрудникам',
     slide: {
       desc1: 'Автоматически назначайте задачи для исправления нарушений',
-      srcImg: 'src/assets/images/usage-slider/03.png',
+      srcImg: 'images/usage-slider/03.png',
       desc2: 'Вовлекайте сотрудников на местах в решение проблем'
     }
   },
@@ -702,7 +702,7 @@ const usages = [
     description: 'Анализ качества работы по всей сети',
     slide: {
       desc1: 'Находите лучшие и худшие подразделения в структуре компании',
-      srcImg: 'src/assets/images/usage-slider/04.png',
+      srcImg: 'images/usage-slider/04.png',
       desc2: 'Создавайте новые ключевые показатели для повышения эффективности'
     }
   }
@@ -715,7 +715,7 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.1',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'src/assets/images/possibilities/possibilities-circle/01.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/01.svg'
   },
   {
     id: 2,
@@ -723,7 +723,7 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.2',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'src/assets/images/possibilities/possibilities-circle/02.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/02.svg'
   },
   {
     id: 3,
@@ -731,7 +731,7 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.3',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'src/assets/images/possibilities/possibilities-circle/03.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/03.svg'
   },
   {
     id: 4,
@@ -739,7 +739,7 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.4',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'src/assets/images/possibilities/possibilities-circle/04.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/04.svg'
   },
   {
     id: 5,
@@ -747,7 +747,7 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.5',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'src/assets/images/possibilities/possibilities-circle/05.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/05.svg'
   },
   {
     id: 6,
@@ -755,7 +755,7 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.6',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'src/assets/images/possibilities/possibilities-circle/06.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/06.svg'
   },
   {
     id: 7,
@@ -763,7 +763,7 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.7',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'src/assets/images/possibilities/possibilities-circle/07.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/07.svg'
   }
 ]
 const roles = ['Менеджеры', 'Аудиторы', 'Управляющие', 'Руководители']
@@ -778,32 +778,32 @@ const difficultItems = [
 
 const accountSliderSrcs = [
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/analytic.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/analytic.png'
   },
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/phone-1.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/phone-1.png'
   },
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/fire-safety.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/fire-safety.png'
   },
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/phone-2.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/phone-2.png'
   },
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/violation.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/violation.png'
   },
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/phone-2.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/phone-2.png'
   },
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/visit.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/visit.png'
   },
   {
-    imgSrc: 'src/assets/images/possibilities/personal-web-account-slider/phone-2.png'
+    imgSrc: 'images/possibilities/personal-web-account-slider/phone-2.png'
   }
 ]
 
-window.addEventListener('scroll', function(e) {
+window.addEventListener('scroll', () => {
   const y = window.pageYOffset
   const switcherInput = document.querySelector('.switcher__input')
   if (switcherInput) {
@@ -893,16 +893,16 @@ export default defineComponent({
       let digits = phone.replace(/^8/, '7').replace(/[^\d]+/, '');
 
       if (digits.length <= 3) {
-        return digits.replace(/^(\d+)$/, '\($1');
+        return digits.replace(/^(\d+)$/, '($1');
       }
       if (digits.length <= 6) {
-        return digits.replace(/^(\d\d\d)(\d+)$/, '\($1\) $2');
+        return digits.replace(/^(\d\d\d)(\d+)$/, '($1) $2');
       }
       if (digits.length > 6 && digits.length <= 8) {
-        return digits.replace(/^(\d\d\d)(\d\d\d)(\d+)$/, '\($1\) $2‒$3');
+        return digits.replace(/^(\d\d\d)(\d\d\d)(\d+)$/, '($1) $2‒$3');
       }
       if (digits.length > 8) {
-        return digits.replace(/^(\d\d\d)(\d\d\d)(\d\d)(\d+)$/, '\($1\) $2‒$3‒$4');
+        return digits.replace(/^(\d\d\d)(\d\d\d)(\d\d)(\d+)$/, '($1) $2‒$3‒$4');
       }
     },
     handleShowModal() {
@@ -930,6 +930,9 @@ export default defineComponent({
     handleCloseBurger() {
       this.showBurger = false;
       document.querySelector('body').style.overflow = ''
+    },
+    getImgUrl(img) {
+      return new URL(`/src/assets/${img}`, import.meta.url);
     }
   },
   mounted() {
