@@ -529,7 +529,7 @@
             </a>
           </div>
         </div>
-        <a href="#" class="arrow-up" :style="`--arrow-up: url(${this.getImgUrl('images/arrow-up.svg')}); --arrow-up-hover: url(${this.getImgUrl('images/arrow-up-hover.svg')})`"></a>
+        <a href="#" class="arrow-up" :style="arrowUpStyle"></a>
       </div>
       <div id="footer" class="container-fluid p-0">
         <pre />
@@ -566,7 +566,7 @@
             </p>
           </div>
           <div :class="['number', errors.includes('number') ? 'error-field' : '']">
-            <select :style="`--dropdown-arrow: url(${getImgUrl('images/dropdown-arrow.svg')})`">
+            <select :style="dropdownStyle">
               <option>+7</option>
               <option>+89</option>
             </select>
@@ -834,6 +834,9 @@ export default defineComponent({
       smartName: '',
       smartNumber: '',
       burgerWatch: false,
+      arrowUp: 'images/arrow-up.svg',
+      arrowUpHover: 'images/arrow-up-hover.svg',
+      dropdownArrow: 'images/dropdown-arrow.svg'
     }
   },
   methods: {
@@ -940,6 +943,19 @@ export default defineComponent({
     const elements = document.querySelectorAll('.swiper-pagination-bullet')
     for (let i = 0; i < elements.length; i++) {
       elements[i].innerHTML = `<div class="title">${usages[i].title}</div><div class="description">${usages[i].description}</div>`
+    }
+  },
+  computed: {
+    arrowUpStyle: function () {
+      return {
+        '--arrow-up': `url("${this.getImgUrl(this.arrowUp)}")`,
+        '--arrow-up-hover': `url("${this.getImgUrl(this.arrowUpHover)}")`
+      }
+    },
+    dropdownStyle: function () {
+      return {
+        '--dropdown-arrow': `url("${this.getImgUrl(this.dropdownArrow)}")`,
+      }
     }
   },
   setup() {
