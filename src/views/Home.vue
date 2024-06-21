@@ -529,7 +529,7 @@
             </a>
           </div>
         </div>
-        <a href="#" class="arrow-up" :style="`--arrow-up: url(${getImgUrl('images/arrow-up.svg')}); --arrow-up-hover: url(${getImgUrl('images/arrow-up-hover.svg')})`"></a>
+        <a href="#" class="arrow-up" :style="`--arrow-up: url(${this.getImgUrl('images/arrow-up.svg')}); --arrow-up-hover: url(${this.getImgUrl('images/arrow-up-hover.svg')})`"></a>
       </div>
       <div id="footer" class="container-fluid p-0">
         <pre />
