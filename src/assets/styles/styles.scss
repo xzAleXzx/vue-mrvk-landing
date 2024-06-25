@@ -412,18 +412,37 @@ body {
         border: 1px solid $black-color;
 
         img {
+            background: var(--arrow-left-blue) no-repeat;
             width: 24px;
             height: 24px;
+
+        }
+        &:hover {
+            border: none;
+            background-color: $orange-color;
+            img {
+                background-image: var(--arrow-left-white);
+            }
         }
     }
 
     .retail-button-right {
-        border: none;
-        background: $orange-color;
+        border: 1px solid $black-color;
 
         img {
+            background: var(--arrow-right-blue) no-repeat;
             width: 24px;
             height: 24px;
+
+        }
+
+        &:hover {
+            border: none;
+            background-color: $orange-color;
+
+            img {
+                background-image: var(--arrow-right-white);
+            }
         }
     }
 }
@@ -965,11 +984,11 @@ body {
         &:after {
             content: "";
             position: absolute;
-            height: 100px;
-            width: 99px;
+            height: 93px;
+            width: 111px;
             border-radius: 50%;
             background: #FFFFFF;
-            bottom: -93px;
+            bottom: -91px;
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 0px -20px 100px 30px rgba(0, 0, 0, 0.5);
@@ -1417,18 +1436,35 @@ body {
                 border: 1px solid $black-color;
 
                 img {
+                    background: var(--arrow-left-blue) no-repeat;
                     width: 24px;
                     height: 24px;
+
+                }
+                &:hover {
+                    border: none;
+                    background-color: $orange-color;
+                    img {
+                        background-image: var(--arrow-left-white);
+                    }
                 }
             }
 
             .account-button-right {
-                border: none;
-                background: $orange-color;
+                border: 1px solid $black-color;
 
                 img {
+                    background: var(--arrow-right-blue) no-repeat;
                     width: 24px;
                     height: 24px;
+
+                }
+                &:hover {
+                    border: none;
+                    background-color: $orange-color;
+                    img {
+                        background-image: var(--arrow-right-white);
+                    }
                 }
             }
         }
@@ -1697,7 +1733,29 @@ body {
             flex-direction: column;
             margin-top: 42px;
 
-            p {
+            .smart-name {
+                position: relative;
+
+            }
+
+            .smart-number {
+                position: relative;
+            }
+
+            .error {
+                align-self: flex-end;
+                font-family: 'GolosTextRegular', sans-serif;
+                font-size: 14px;
+                line-height: 19px;
+                position: absolute;
+                right: 0;
+                bottom: 10px;
+                color: $error-color;
+                padding: 0;
+                margin: 0;
+            }
+
+            .places {
                 margin: 0 0 16px 0;
                 align-self: flex-start;
             }
@@ -1705,7 +1763,7 @@ body {
             input {
                 width: 440px;
                 padding: 9px 8px;
-                margin-bottom: 16px;
+                margin-bottom: 35px;
                 border: 2px solid rgba(0, 0, 0, 0.08);
                 border-radius: 2px;
             }
@@ -1738,7 +1796,7 @@ body {
             border-radius: 100px;
             background: $orange-color;
             color: $white;
-            margin-top: 32px;
+            margin-top: 20px;
             margin-bottom: 16px;
         }
         .calculate-description {

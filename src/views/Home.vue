@@ -2,46 +2,46 @@
   <div class="container-fluid m-0 p-0">
     <!--Хедер-->
     <div id="header" class="header-height container-fluid p-0">
-        <div class="navbar-mrvk-logo">
-          <a href="#" class="navbar-mrvk-logo__link">
-            <div class="navbar-mrvk-logo__svg">
-              <img src="../assets/images/logo.svg" alt="logo">
-            </div>
-            <div class="navbar-mrvk-logo__title">
-              <span>Муравейник</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="navbar-mrvk-menu">
-          <ul class="navbar-mrvk-menu__ul">
-            <li class="navbar-item">
-              <a href="#usage">Как это работает</a>
-            </li>
-            <li class="navbar-item">
-              <a href="#possibilities">Возможности</a>
-            </li>
-            <li class="navbar-item">
-              <a href="#contacts">Контакты</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="navbar-mrvk-group-btn">
-          <a href="tel:+79506405272" class="number">+7 950 640-52-72</a>
-          <a href="https://lk.mrvk.pro/">
-            <button class="login">Войти</button>
-          </a>
-          <div>
-            <button class="register" @click="handleShowModal">
-              <span>Регистрация</span>
-              <img src="../assets/images/link-arrow.svg" alt="linkArrow">
-            </button>
+      <div class="navbar-mrvk-logo">
+        <a href="#" class="navbar-mrvk-logo__link">
+          <div class="navbar-mrvk-logo__svg">
+            <img src="../assets/images/logo.svg" alt="logo">
           </div>
+          <div class="navbar-mrvk-logo__title">
+            <span>Муравейник</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="navbar-mrvk-menu">
+        <ul class="navbar-mrvk-menu__ul">
+          <li class="navbar-item">
+            <a href="#usage">Как это работает</a>
+          </li>
+          <li class="navbar-item">
+            <a href="#possibilities">Возможности</a>
+          </li>
+          <li class="navbar-item">
+            <a href="#contacts">Контакты</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navbar-mrvk-group-btn">
+        <a href="tel:+79506405272" class="number">+7 950 640-52-72</a>
+        <a href="https://lk.mrvk.pro/">
+          <button class="login">Войти</button>
+        </a>
+        <div>
+          <button class="register" @click="handleShowModal">
+            <span>Регистрация</span>
+            <img src="../assets/images/link-arrow.svg" alt="linkArrow">
+          </button>
         </div>
-        <div class="burger" @click="handleShowBurger">
-          <img src="../assets/images/burger.svg" alt="burger">
-        </div>
+      </div>
+      <div class="burger" @click="handleShowBurger">
+        <img src="../assets/images/burger.svg" alt="burger">
+      </div>
     </div>
     <!--Главный Блок-->
     <div id="home-page">
@@ -87,8 +87,9 @@
       </div>
       <div class="mrvk-retail-slider container p-0">
         <swiper
-          :slides-per-view="3"
+          :slides-per-view="4"
           :space-between="16"
+          :loop="true"
           :autoplay="{
                 delay: 2500,
                 disableOnInteraction: false,
@@ -99,7 +100,7 @@
         >
           <swiper-slide v-for="(retailer, key) in retailers" :key="key" class="mrvk-retail-card">
             <img class="retail-img" :src="`${getImgUrl(retailer.srcImg)}`" alt="retailerImg" />
-            <div class="retailer-title">
+            <div class="retailer-title" :style="key === 5 && 'font-size: 20px;'">
               {{ retailer.title }}
             </div>
             <div class="retailer-subtitle">
@@ -112,10 +113,10 @@
           </swiper-slide>
           <div class="retail-button-group">
             <button type="button" class="retail-button-left" @click="swiperPrevSlide">
-              <img src="../assets/images/left-arrow.svg " alt="leftArrow">
+              <img :src="srcOnePx" :style="sliderArrowStyle" alt="leftArrow" />
             </button>
             <button type="button" class="retail-button-right" @click="swiperNextSlide">
-              <img src="../assets/images/right-arrow.svg " alt="rightArrow">
+              <img :src="srcOnePx" :style="sliderArrowStyle" alt="rightArrow" />
             </button>
           </div>
           <div class="swiper-pagination"></div>
@@ -142,7 +143,7 @@
               clickable: true,
             }"
             :autoplay="{
-              delay: 2500,
+              delay: 3000,
               disableOnInteraction: false,
             }"
             :modules="modules"
@@ -309,7 +310,7 @@
               :desc2="item.desc2"
               :active="{'active': activeIndex === index }"
               :get-img-url="getImgUrl"
-              @close="handleClose"
+              @close="handleCloseTooltip"
               @click="setActive(index)"
             >
               <img :class="`${item.name}-img`" :src="`${getImgUrl(item.imgSrc)}`" :alt="`${item.name}`">
@@ -332,16 +333,16 @@
       </div>
       <div class="difficulties-block">
         <div class="difficulties-header">
-          <div v-for="role in roles" :key="role">
-            <span @click="handleSelectRole" :class="{'active': selectedRole === role}">{{ role }}</span>
+          <div v-for="item in roles" :key="item.role">
+            <span @click="handleSelectRole" :class="{'active': selectedRole === item.role}">{{ item.role }}</span>
           </div>
         </div>
         <pre />
         <div class="difficulties-body">
           <ul>
-            <li v-for="item in difficultItems" :key="item">
+            <li v-for="(desc, key) in selectedRoleDesc" :key="key">
               <img class="item-img" src="../assets/images/possibilities/difficulties-list.svg" alt="li">
-              <span>{{ item }}</span>
+              <span>{{ desc }}</span>
             </li>
           </ul>
         </div>
@@ -353,10 +354,12 @@
 
         <swiper
           :slides-per-view="2"
+          :slidesPerGroup="2"
           :autoplay="{
-                delay: 2500,
+                delay: 4000,
                 disableOnInteraction: false,
           }"
+          :loop="true"
           :slidesOffsetBefore="5"
           :navigation="{ nextEl: '.account-button-right', prevEl: '.account-button-left' }"
           :modules="modules"
@@ -370,10 +373,10 @@
         <div class="account-buttons">
           <div class="account-button-group">
             <button type="button" class="account-button-left" @click="swiperPrevSlide">
-              <img src="../assets/images/left-arrow.svg " alt="leftArrow">
+              <img :src="srcOnePx" :style="sliderArrowStyle" alt="leftArrow">
             </button>
             <button type="button" class="account-button-right" @click="swiperNextSlide">
-              <img src="../assets/images/right-arrow.svg " alt="rightArrow">
+              <img :src="srcOnePx" :style="sliderArrowStyle" alt="rightArrow">
             </button>
           </div>
         </div>
@@ -474,10 +477,23 @@
         </div>
       </div>
       <form class="right-block" @submit="checkForm2" method="post">
-        <div class="input-block" >
-          <input :class="[smartErrors.includes('smart-name') ? 'field-error' : '1']" type="text" placeholder="Как вас зовут?" v-model="smartName">
-          <input :class="[smartErrors.includes('smart-number') ? 'field-error' : '2']" type="text" placeholder="+7 (___) ___-__-__" v-model="smartNumber">
-          <p>Количество точек</p>
+        <div class="input-block">
+          <div class="smart-name">
+            <input :class="[smartErrors.includes('smart-name') ? 'field-error' : '1']" type="text"
+                   placeholder="Как вас зовут?" v-model="smartName">
+            <p class="error" v-if="smartErrors.includes('smart-name')">
+              Введите ваше имя
+            </p>
+          </div>
+          <div class="smart-number">
+            <input :class="[smartErrors.includes('smart-number') ? 'field-error' : '2']" type="text"
+                   placeholder="+7 (___) ___-__-__" v-model="smartNumber" maxlength="18"
+                   @input="event => smartNumber = formatFullPhone(event.target.value, 'fullNumber')">
+            <p class="error" v-if="smartErrors.includes('smart-number')">
+              Укажите корректный номер телефона
+            </p>
+          </div>
+          <p class="places">Количество точек</p>
           <div class="count-point">
             <button type="button" @click="handleCountPlace('minus')">-</button>
             <input type="text" :value="countPlace" disabled>
@@ -518,7 +534,7 @@
           <h4 class="supports-title">
             Поддержка
           </h4>
-          <p>support@mrvk.pro</p>
+          <p><a href="mailto:support@mrvk.pro">support@mrvk.pro</a></p>
           <p>Ежедневно:<br>09:00-18:00</p>
           <div class="icon-group">
             <a href="https://telegram.org/">
@@ -545,7 +561,7 @@
     <!-- use the modal component, pass in the prop -->
     <modal :show="showModal" @close="handleCloseModal">
       <template #header>
-        <h3>Получить муравейник бесплатно!</h3>
+        <h3>Получить Муравейник бесплатно!</h3>
         <pre />
       </template>
       <template #body>
@@ -570,7 +586,8 @@
               <option>+7</option>
               <option>+89</option>
             </select>
-            <input type="text" placeholder="(___) ___-__-__" v-model="number" maxlength="15" @input="event => number = formatPhone(event.target.value)">
+            <input type="text" placeholder="(___) ___-__-__" v-model="number" maxlength="15"
+                   @input="event => number = formatPhone(event.target.value)">
             <p class="error" v-if="errors.includes('number')">
               Укажите корректный номер телефона
             </p>
@@ -620,7 +637,8 @@
             <button class="login">Войти</button>
           </a>
           <button class="register" @click="() => {handleCloseBurger(); handleShowModal()}">Регистрация</button>
-          <button class="try-free" @click="() => {handleCloseBurger(); handleShowModal()}">Попробовать бесплатно</button>
+          <button class="try-free" @click="() => {handleCloseBurger(); handleShowModal()}">Попробовать бесплатно
+          </button>
         </div>
       </template>
     </burger>
@@ -639,9 +657,9 @@ import BaseTooltip from '@/components/BaseTooltip.vue'
 import modal from '@/components/Modal.vue'
 import burger from '@/components/BurgerMenu.vue'
 
-const showModal = ref(false);
-const showModal2 = ref(false);
-const showBurger = ref(false);
+const showModal = ref(false)
+const showModal2 = ref(false)
+const showBurger = ref(false)
 
 const retailers = [
   {
@@ -661,8 +679,33 @@ const retailers = [
   },
   {
     title: 'Аптеки',
-    subtitle: 'фармцевтические компании',
+    subtitle: 'и медицинские центры',
     srcImg: 'images/retail-slider/pharmacy.png'
+  },
+  {
+    title: 'Салоны красоты',
+    subtitle: 'парикмахерские и спа',
+    srcImg: 'images/retail-slider/hair-salon.png'
+  },
+  {
+    title: 'Развлекательные учреждения',
+    subtitle: 'для детей и взрослых',
+    srcImg: 'images/retail-slider/recreational.png'
+  },
+  {
+    title: 'Фитнесс залы',
+    subtitle: ' спортивные секции',
+    srcImg: 'images/retail-slider/gym.png'
+  },
+  {
+    title: 'Торговые центры',
+    subtitle: 'и офисные компании',
+    srcImg: 'images/retail-slider/mall.png'
+  },
+  {
+    title: 'Управляющие компании',
+    subtitle: 'и обслуживающие организации',
+    srcImg: 'images/retail-slider/company.png'
   }
 ]
 
@@ -767,14 +810,48 @@ const circleItems = [
     imgSrc: 'images/possibilities/possibilities-circle/07.svg'
   }
 ]
-const roles = ['Менеджеры', 'Аудиторы', 'Управляющие', 'Руководители']
 
-const difficultItems = [
-  'Большое количество обрабатываемой информации и куча времени на планирование проверок',
-  'Контроль процессов в ручном режиме, по телефону или whatsapp',
-  'Сбор бумажной отчетности, внесение данных в excel и получение фотографий из мессенджеров',
-  'Потеря и несвоевременное получение отчетов',
-  'Недобросовестное проведение проверок аудиторами и махинации с данными'
+const roles = [
+  {
+    role: 'Менеджеры',
+    desc: [
+      'Большое количество обрабатываемой информации и куча времени на планирование проверок',
+      'Контроль процессов в ручном режиме, по телефону или whatsapp',
+      'Сбор бумажной отчетности, внесение данных в excel и получение фотографий из мессенджеров',
+      'Потеря и несвоевременное получение отчетов',
+      'Недобросовестное проведение проверок аудиторами и махинации с данными'
+    ]
+  },
+  {
+    role: 'Аудиторы',
+    desc: [
+      'Ручное заполнение анкет и чек-листов неудобно и занимает много времени',
+      'Результаты проверки передаются разными способами: бумажные отчеты и фото в мессенджеры',
+      'Отсутствует контроль за устранением выявленных нарушений',
+      'Есть риск потерять или перепутать данные с результатами проверок',
+      'Нет четкого плана и графика проверок'
+    ]
+  },
+  {
+    role: 'Управляющие точек',
+    desc: [
+      'Нет возможности ознакомиться с результатами проверки',
+      'Нет возможности дать обратную связь по результатам проверки',
+      'Отсутствие понимания общей картины по проверкам и соответствия стандартам компании',
+      'Нарушения в процессах не устраняются или это происходит не вовремя',
+      'Не вовлечены в процесс достижения результата'
+    ]
+  },
+  {
+    role: 'Руководители',
+    desc: [
+      'Отсутствие актуальных данных на текущий момент времени',
+      'Сложно контролировать ключевые показатели и работать с KPI',
+      'Нет возможности быстрого анализа данных и их просмотра в разных разрезах',
+      'Данные разрозненны, недостоверны или частично отсутствуют',
+      'Подготовка отчетности для принятия решений занимает много времени'
+    ]
+  }
 ]
 
 const accountSliderSrcs = [
@@ -810,7 +887,7 @@ window.addEventListener('scroll', () => {
   if (switcherInput) {
     switcherInput.checked = y >= 200
   }
-});
+})
 
 export default defineComponent({
   name: 'HomeView',
@@ -823,8 +900,10 @@ export default defineComponent({
   },
   data() {
     return {
+      srcOnePx: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
       activeIndex: '',
       selectedRole: 'Менеджеры',
+      selectedRoleDesc: roles[0].desc,
       countPlace: 1,
       errors: [],
       smartErrors: [],
@@ -836,18 +915,29 @@ export default defineComponent({
       burgerWatch: false,
       arrowUp: 'images/arrow-up.svg',
       arrowUpHover: 'images/arrow-up-hover.svg',
-      dropdownArrow: 'images/dropdown-arrow.svg'
+      dropdownArrow: 'images/dropdown-arrow.svg',
+      leftArrowWhite: 'images/left-arrow-white.svg',
+      rightArrowWhite: 'images/right-arrow-white.svg',
+      leftArrowBlue: 'images/left-arrow-blue.svg',
+      rightArrowBlue: 'images/right-arrow-blue.svg'
+    }
+  },
+  mounted() {
+    const elements = document.querySelectorAll('.swiper-pagination-bullet')
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].innerHTML = `<div class="title">${usages[i].title}</div><div class="description">${usages[i].description}</div>`
     }
   },
   methods: {
     setActive(index) {
       this.activeIndex = index
     },
-    handleClose(data) {
+    handleCloseTooltip(data) {
       this.activeIndex = data
     },
     handleSelectRole(data) {
       this.selectedRole = data.target.innerText
+      this.selectedRoleDesc = this.roles.filter(i => i.role === data.target.innerText)[0].desc
     },
     handleCountPlace(operator) {
       if (operator === 'minus' && this.countPlace > 1) {
@@ -859,102 +949,132 @@ export default defineComponent({
     },
     checkForm(e) {
       e.preventDefault()
-      this.errors = [];
-      if (this.name === '') this.errors.push('name');
-      if (this.email === '') this.errors.push('email');
+      this.errors = []
+      if (this.name === '') this.errors.push('name')
+      if (this.email === '') this.errors.push('email')
       const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      if (!this.email.trim().toLowerCase().match(regexEmail)) this.errors.push('email');
-      if (this.number === '') this.errors.push('number');
+      if (!this.email.trim().toLowerCase().match(regexEmail)) this.errors.push('email')
+      if (this.number === '') this.errors.push('number')
       if (this.errors.length === 0) {
         // fetch
         console.log({
           name: this.name,
           email: this.email,
           number: this.number
-        });
-        this.handleCloseModal();
-        this.handleShowModal2();
-        this.name = '';
-        this.email = '';
-        this.number = '';
+        })
+        this.handleCloseModal()
+        this.handleShowModal2()
+        this.name = ''
+        this.email = ''
+        this.number = ''
       }
     },
     checkForm2(e) {
       e.preventDefault()
-      this.smartErrors = [];
-      if (this.smartName === '') this.smartErrors.push('smart-name');
-      if (this.smartNumber === '') this.smartErrors.push('smart-number');
+      this.smartErrors = []
+      if (this.smartName === '') this.smartErrors.push('smart-name')
+      if (this.smartNumber === '') this.smartErrors.push('smart-number')
+
       if (this.smartErrors.length === 0) {
         // fetch
-        this.handleShowModal2();
-        this.smartName = '';
-        this.smartNumber = '';
-        this.countPlace = 1;
+        this.handleShowModal2()
+        console.log({
+          name: this.smartName,
+          number: this.smartNumber,
+          place: this.countPlace
+        })
+        this.smartName = ''
+        this.smartNumber = ''
+        this.countPlace = 1
       }
     },
     formatPhone(data) {
-      let phone = data.replaceAll(/\D/g, '');
-      let digits = phone.replace(/^8/, '7').replace(/[^\d]+/, '');
+      let phone = data.replaceAll(/\D/g, '')
+      let digits = phone.replace(/[^\d]+/, '')
 
       if (digits.length <= 3) {
-        return digits.replace(/^(\d+)$/, '($1');
+        return digits.replace(/^(\d+)$/, '($1')
       }
       if (digits.length <= 6) {
-        return digits.replace(/^(\d\d\d)(\d+)$/, '($1) $2');
+        return digits.replace(/^(\d\d\d)(\d+)$/, '($1) $2')
       }
       if (digits.length > 6 && digits.length <= 8) {
-        return digits.replace(/^(\d\d\d)(\d\d\d)(\d+)$/, '($1) $2‒$3');
+        return digits.replace(/^(\d\d\d)(\d\d\d)(\d+)$/, '($1) $2‒$3')
       }
       if (digits.length > 8) {
-        return digits.replace(/^(\d\d\d)(\d\d\d)(\d\d)(\d+)$/, '($1) $2‒$3‒$4');
+        return digits.replace(/^(\d\d\d)(\d\d\d)(\d\d)(\d+)$/, '($1) $2‒$3‒$4')
+      }
+    },
+    formatFullPhone(data) {
+      let phone = data.replace(/\D/g, '')
+      if (data.length === 1) {
+        phone = data.match(/^[7,8]/)
+          ? phone.replace(/^[7,8]/, '+7 (')
+          : phone.replace(/(\d)/, '7$1')
+      }
+      if (phone === '7') return ''
+
+      if (phone.length <= 4) {
+        return phone.replace(/^(.)(\d+)$/, '+$1 ($2')
+      }
+      if (phone.length <= 7) {
+        return phone.replace(/^(\d)(\d\d\d)(\d+)$/, '+$1 ($2) $3')
+      }
+      if (phone.length > 7 && phone.length <= 9) {
+        return phone.replace(/^(\d)(\d\d\d)(\d\d\d)(\d+)$/, '+$1 ($2) $3‒$4')
+      }
+      if (phone.length > 9) {
+        return phone.replace(/^(\d)(\d\d\d)(\d\d\d)(\d\d)(\d+)$/, '+$1 ($2) $3‒$4‒$5')
       }
     },
     handleShowModal() {
-      this.showModal = true;
+      this.showModal = true
       document.querySelector('body').style.overflow = 'hidden'
     },
     handleShowModal2() {
-      this.showModal2 = true;
+      this.showModal2 = true
       document.querySelector('body').style.overflow = 'hidden'
 
     },
     handleCloseModal() {
-      this.showModal = false;
+      this.showModal = false
       document.querySelector('body').style.overflow = ''
     },
     handleCloseModal2() {
-      this.showModal2 = false;
+      this.showModal2 = false
       document.querySelector('body').style.overflow = ''
 
     },
     handleShowBurger() {
-      this.showBurger = true;
+      this.showBurger = true
       document.querySelector('body').style.overflow = 'hidden'
     },
     handleCloseBurger() {
-      this.showBurger = false;
+      this.showBurger = false
       document.querySelector('body').style.overflow = ''
     },
     getImgUrl(img) {
-      return new URL(`/src/assets/${img}`, import.meta.url);
-    }
-  },
-  mounted() {
-    const elements = document.querySelectorAll('.swiper-pagination-bullet')
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].innerHTML = `<div class="title">${usages[i].title}</div><div class="description">${usages[i].description}</div>`
+      return new URL(`/src/assets/${img}`, import.meta.url)
     }
   },
   computed: {
-    arrowUpStyle: function () {
+    arrowUpStyle: function() {
       return {
         '--arrow-up': `url("${this.getImgUrl(this.arrowUp)}")`,
         '--arrow-up-hover': `url("${this.getImgUrl(this.arrowUpHover)}")`
       }
     },
-    dropdownStyle: function () {
+    dropdownStyle: function() {
       return {
-        '--dropdown-arrow': `url("${this.getImgUrl(this.dropdownArrow)}")`,
+        '--dropdown-arrow': `url("${this.getImgUrl(this.dropdownArrow)}")`
+      }
+    },
+    sliderArrowStyle: function() {
+      return {
+        '--arrow-left-blue': `url("${this.getImgUrl(this.leftArrowBlue)}")`,
+        '--arrow-right-blue': `url("${this.getImgUrl(this.rightArrowBlue)}")`,
+        '--arrow-left-white': `url("${this.getImgUrl(this.leftArrowWhite)}")`,
+        '--arrow-right-white': `url("${this.getImgUrl(this.rightArrowWhite)}")`
       }
     }
   },
@@ -964,13 +1084,12 @@ export default defineComponent({
       usages,
       circleItems,
       roles,
-      difficultItems,
       accountSliderSrcs,
       showModal,
       showModal2,
       showBurger,
       modules: [Autoplay, Pagination, Navigation]
     }
-  },
+  }
 })
 </script>
