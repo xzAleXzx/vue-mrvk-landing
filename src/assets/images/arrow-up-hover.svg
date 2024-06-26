@@ -1,6 +1,6 @@
-<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="25" cy="25" r="24.4" stroke="#FF5830" fill="#FF5830" stroke-width="1.2"/>
-    <path d="M30.6464 24.3536C30.8417 24.5488 31.1583 24.5488 31.3536 24.3536C31.5488 24.1583 31.5488 23.8417 31.3536 23.6464L30.6464 24.3536ZM31.3536 23.6464L25.6967 17.9896L24.9896 18.6967L30.6464 24.3536L31.3536 23.6464Z" fill="#FFFFFF"/>
-    <path d="M19 24L24.6569 18.3431" stroke="#FFFFFF" stroke-linecap="round"/>
-    <path d="M25 32L25.0002 19" stroke="#FFFFFF" stroke-linecap="round"/>
+<svg width="34" height="34" viewBox="0 0 34 34" fill="#FF5830" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="17" cy="17" r="16.592" stroke="#FF5830" stroke-width="0.816"/>
+    <path d="M20.7596 16.2404C20.8924 16.3732 21.1076 16.3732 21.2404 16.2404C21.3732 16.1076 21.3732 15.8924 21.2404 15.7596L20.7596 16.2404ZM21.2404 15.7596L17.7049 12.224L17.224 12.7049L20.7596 16.2404L21.2404 15.7596Z" fill="#FFFFFF"/>
+    <path d="M17 22L17.0002 13" stroke="#FFFFFF" stroke-width="0.68" stroke-linecap="round"/>
+    <path d="M13 16L16.5355 12.4645" stroke="#FFFFFF" stroke-width="0.68" stroke-linecap="round"/>
 </svg>

@@ -29,11 +29,11 @@
 
       <div class="navbar-mrvk-group-btn">
         <a href="tel:+79506405272" class="number">+7 950 640-52-72</a>
-        <a href="https://lk.mrvk.pro/">
-          <button class="login">Войти</button>
+        <a href="https://lk.mrvk.pro/" class="login">
+          <button>Войти</button>
         </a>
-        <div>
-          <button class="register" @click="handleShowModal">
+        <div class="register">
+          <button @click="handleShowModal">
             <span>Регистрация</span>
             <img src="../assets/images/link-arrow.svg" alt="linkArrow">
           </button>
@@ -73,7 +73,13 @@
           </div>
         </div>
         <div class="right">
-          <img class="cover__image" src="../assets/images/main-phone.png" alt="img">
+          <div class="left-side">
+            <img class="phone-cover__image" src="../assets/images/phone-cover.png" alt="phoneCover">
+            <img class="circle-cover__image" src="../assets/images/circle.svg" alt="phoneCover">
+            <img class="diagram-cover__image" src="../assets/images/diagram.svg" alt="bgCover">
+          </div>
+          <div class="right-side"></div>
+
         </div>
       </div>
 
@@ -87,8 +93,8 @@
       </div>
       <div class="mrvk-retail-slider container p-0">
         <swiper
-          :slides-per-view="4"
-          :space-between="16"
+          :slides-per-view="5.3"
+          :space-between="11"
           :loop="true"
           :autoplay="{
                 delay: 2500,
@@ -100,7 +106,7 @@
         >
           <swiper-slide v-for="(retailer, key) in retailers" :key="key" class="mrvk-retail-card">
             <img class="retail-img" :src="`${getImgUrl(retailer.srcImg)}`" alt="retailerImg" />
-            <div class="retailer-title" :style="key === 5 && 'font-size: 20px;'">
+            <div class="retailer-title">
               {{ retailer.title }}
             </div>
             <div class="retailer-subtitle">
@@ -125,8 +131,8 @@
     </div>
     <!--Как это работает-->
     <div id="usage" class="container-fluid p-0">
+      <img class="background-lines" src="../assets/images/background-lines.svg" alt="backgroundLines">
       <div class="right-usage-block">
-        <img class="background-phone" src="../assets/images/background-phone.png" alt="backgroundPhone">
         <div class="usage-title">
           <span>Как</span>
           <div class="first-line">работает</div>
@@ -142,6 +148,7 @@
               el: '.paginator',
               clickable: true,
             }"
+            :loop="true"
             :autoplay="{
               delay: 3000,
               disableOnInteraction: false,
@@ -151,39 +158,37 @@
           >
             <div class="paginator"></div>
             <div class="left-side-text">
-              <div class="slide">Шаг 1</div>
-              <div class="slide">Шаг 2</div>
-              <div class="slide">Шаг 3</div>
-              <div class="slide">Шаг 4</div>
             </div>
             <swiper-slide class="mrvk-usage-card" v-for="(usage, key) in usages" :key="key">
-              <div class="slide-desc1">
-                <p>{{ usage.slide.desc1 }}</p>
-                <span>{{ usage.id }}</span>
-              </div>
               <img class="usage-img" :src="`${getImgUrl(usage.slide.srcImg)}`" alt="usageImg">
-              <div class="slide-desc2">
-                {{ usage.slide.desc2 }}
+              <div class="slide-block">
+                <span>{{ usage.id }}</span>
+                <div class="slide-desc1">
+                  <p>{{ usage.slide.desc1 }}</p>
+                </div>
+                <div class="slide-desc2">
+                  <p>{{ usage.slide.desc2 }}</p>
+                </div>
               </div>
             </swiper-slide>
           </swiper>
         </div>
         <div class="usage-function-block">
           <div class="title">
-            Все функции для контроля работы торговой сети собраны в одном универсальном приложении
+            Все функции для контроля работы торговой сети собраны<br>в одном универсальном приложении
           </div>
           <div class="usage-function-block-template">
             <div class="percent-block">
               <div>
                 <span>+</span>50%
                 <p>
-                  Контроль работы сотрудников
+                  Контроль<br>работы<br>сотрудников
                 </p>
               </div>
               <div>
                 <span>+</span>40%
                 <p>
-                  Повышение лояльности клиентов
+                  Повышение<br>лояльности<br>клиентов
                 </p>
               </div>
               <div>
@@ -193,40 +198,42 @@
                 </p>
               </div>
             </div>
-            <div class="midle-column">
+            <div class="middle-column">
               <img src="../assets/images/usage-phone.png" alt="usagePhone">
             </div>
             <div class="percent-block right-column">
               <div>
                 <span>-</span>95%
                 <p>
-                  Время на постановку задач
+                  Время<br>на постановку<br>задач
                 </p>
               </div>
               <div>
                 <span>-</span>70%
                 <p>
-                  Уменьшение количества нарушений
+                  Уменьшение<br>количества<br>нарушений
                 </p>
               </div>
               <div>
                 <span>-</span>50%
                 <p>
-                  Время на анализ и контроль
+                  Время на анализ<br>и контроль
                 </p>
               </div>
             </div>
           </div>
           <div class="orange-block">
-            <img class="bg-logo" src="../assets/images/background-logo.png" alt="bgLogo">
-            <div class="title">
-              Бесплатная версия
-              <span>с полным функционалом</span>
+            <img class="bg-logo" src="../assets/images/background-logo.svg" alt="bgLogo">
+            <div class="orange-container">
+              <div class="title">
+                Бесплатная версия
+                <span>с полным функционалом</span>
+              </div>
+              <button class="try-now" id="show-modal" @click="handleShowModal">
+                <span>Попробовать прямо сейчас</span>
+                <img src="../assets/images/right-arrow-black.svg" alt="rightArrow">
+              </button>
             </div>
-            <button class="try-now" id="show-modal" @click="handleShowModal">
-              <span>Попробовать прямо сейчас</span>
-              <img src="../assets/images/right-arrow-black.svg" alt="rightArrow">
-            </button>
           </div>
         </div>
       </div>
@@ -246,31 +253,7 @@
               <img src="../assets/images/possibilities/possibilities-section/01.svg" alt="copy">
             </div>
             <p>
-              <span>Проверки качества работы</span> торговых и сервисных точек по чек-листам
-            </p>
-          </div>
-          <div class="possibilities-section">
-            <div class="possibilities-section__img">
-              <img src="../assets/images/possibilities/possibilities-section/02.svg" alt="copy">
-            </div>
-            <p>
-              <span>Создание задач</span> для устранения нарушений по итогам проверки
-            </p>
-          </div>
-          <div class="possibilities-section">
-            <div class="possibilities-section__img">
-              <img src="../assets/images/possibilities/possibilities-section/03.svg" alt="copy">
-            </div>
-            <p>
-              <span>Мониторинг цен</span> на товары и услуги конкурентов
-            </p>
-          </div>
-          <div class="possibilities-section">
-            <div class="possibilities-section__img">
-              <img src="../assets/images/possibilities/possibilities-section/04.svg" alt="copy">
-            </div>
-            <p>
-              <span>Аналитическая панель</span> для контроля результатов работы сети
+              <span>Проверки качества работы</span>торговых и сервисных точек<br>по чек-листам
             </p>
           </div>
           <div class="possibilities-section">
@@ -278,7 +261,31 @@
               <img src="../assets/images/possibilities/possibilities-section/05.svg" alt="copy">
             </div>
             <p>
-              <span>Гибкая настройка</span> чек-листов и анкетирования под любые задачи
+              <span>Гибкая настройка</span>чек-листов и анкетирования<br>под любые задачи
+            </p>
+          </div>
+          <div class="possibilities-section">
+            <div class="possibilities-section__img">
+              <img src="../assets/images/possibilities/possibilities-section/02.svg" alt="copy">
+            </div>
+            <p>
+              <span>Создание задач</span>для устранения нарушений<br>по итогам проверки
+            </p>
+          </div>
+          <div class="possibilities-section">
+            <div class="possibilities-section__img">
+              <img src="../assets/images/possibilities/possibilities-section/03.svg" alt="copy">
+            </div>
+            <p>
+              <span>Мониторинг цен</span>на товары и услуги<br>конкурентов
+            </p>
+          </div>
+          <div class="possibilities-section">
+            <div class="possibilities-section__img">
+              <img src="../assets/images/possibilities/possibilities-section/04.svg" alt="copy">
+            </div>
+            <p>
+              <span>Аналитическая панель</span>для контроля результатов<br>работы сети
             </p>
           </div>
           <div class="possibilities-section">
@@ -286,14 +293,20 @@
               <img src="../assets/images/possibilities/possibilities-section/06.svg" alt="copy">
             </div>
             <p>
-              <span>Контроль посещения точек</span> аудиторами через GPS
+              <span>Контроль посещения точек</span>аудиторами через GPS
             </p>
           </div>
+        </div>
+        <div class="right-lines-bg">
+          <img src="../assets/images/possibilities/possibilities-circle/right-lines-bg.png" alt="rightLines">
+        </div>
+        <div class="left-lines-bg">
+          <img src="../assets/images/possibilities/possibilities-circle/left-lines-bg.png" alt="leftLines">
         </div>
       </div>
       <div class="triangle-block">
         <p>
-          Всё для контроля работы компании<span>в одном сервисе</span>
+          Всё для контроля работы<br>компании<span>в одном сервисе</span>
         </p>
         <div class="triangle"></div>
       </div>
@@ -332,9 +345,12 @@
         </div>
       </div>
       <div class="difficulties-block">
+        <div class="right-lines-bg">
+          <img src="../assets/images/possibilities/right-lines-bg.png" alt="rightLinesBg">
+        </div>
         <div class="difficulties-header">
-          <div v-for="item in roles" :key="item.role">
-            <span @click="handleSelectRole" :class="{'active': selectedRole === item.role}">{{ item.role }}</span>
+          <div v-for="item in roles" :key="item.role" :class="{'active': selectedRole === item.role}">
+            <p @click="handleSelectRole">{{ item.role }}</p>
           </div>
         </div>
         <pre />
@@ -349,7 +365,7 @@
       </div>
       <div class="personal-web-account">
         <div class="title">
-          Все функции для контроля работы торговой сети собраны в одном универсальном приложении
+          <span>Личный веб-кабинет и приложение</span><br>для ваших сотрудников
         </div>
 
         <swiper
@@ -448,94 +464,18 @@
     </div>
     <!--Вопросы-->
     <div id="questions" class="container">
-      <div class="question-block">
-        <p class="title">Остались вопросы?</p>
-        <p class="subtitle">Просто позвоните нам!</p>
-        <p class="number">+7 800 555 66 77</p>
-        <p class="supports">Поддержка в соцсетях:</p>
-        <div class="icon-group">
-          <a href="https://telegram.org/">
-            <img src="../assets/images/telegram.svg" alt="telegram">
-          </a>
-          <a href="https://www.whatsapp.com/">
-            <img src="../assets/images/whatsapp.svg" alt="whatsApp">
-          </a>
-        </div>
-
-        <button @click="handleShowModal">Подключиться сейчас</button>
+      <div class="questions-left-lines-bg">
+        <img src="../assets/images/questions-left-lines-bg.png" alt="questionsLeftBg">
       </div>
-      <img class="question-bg" src="../assets/images/questions-background.png" alt="questionBg">
-    </div>
-    <div id="cost-calculation-block" class="container-fluid p-0">
-      <img class="bg-logo" src="../assets/images/cost-calculate-bg.png" alt="bgLogo">
-      <div class="left-block">
-        <div class="title">
-          Расчет стоимости Муравейника
-        </div>
-        <div class="subtitle">
-          Заполните форму и мы рассчитаем стоимость для вашей компании
-        </div>
+      <div class="questions-right-lines-bg">
+        <img src="../assets/images/questions-right-lines-bg.png" alt="questionsRightBg">
       </div>
-      <form class="right-block" @submit="checkForm2" method="post">
-        <div class="input-block">
-          <div class="smart-name">
-            <input :class="[smartErrors.includes('smart-name') ? 'field-error' : '1']" type="text"
-                   placeholder="Как вас зовут?" v-model="smartName">
-            <p class="error" v-if="smartErrors.includes('smart-name')">
-              Введите ваше имя
-            </p>
-          </div>
-          <div class="smart-number">
-            <input :class="[smartErrors.includes('smart-number') ? 'field-error' : '2']" type="text"
-                   placeholder="+7 (___) ___-__-__" v-model="smartNumber" maxlength="18"
-                   @input="event => smartNumber = formatFullPhone(event.target.value, 'fullNumber')">
-            <p class="error" v-if="smartErrors.includes('smart-number')">
-              Укажите корректный номер телефона
-            </p>
-          </div>
-          <p class="places">Количество точек</p>
-          <div class="count-point">
-            <button type="button" @click="handleCountPlace('minus')">-</button>
-            <input type="text" :value="countPlace" disabled>
-            <button type="button" @click="handleCountPlace('plus')">+</button>
-          </div>
-        </div>
-        <button class="calculate" type="submit">Узнать стоимость</button>
-        <p class="calculate-description">Нажимая на кнопку, вы соглашаетесь<br>на <a href="#">обработку персональных
-          данных</a></p>
-      </form>
-    </div>
-    <!--Контакты-->
-    <div id="contacts" class="container-fluid">
-      <div class="content container-fluid p-0">
-        <div class="title">
-          Контакты
-        </div>
-        <div class="ant-hill">
-          <h4 class="ant-hill-title">
-            Муравейник
-          </h4>
-          <p>
-            Программа управления<br>и контроля торговой сети
-          </p>
-          <p>
-            г. Екатеринбург<br>ул. Сулимова д. 50, оф. 0.28
-          </p>
-        </div>
-        <div class="sales">
-          <h4 class="sales-title">
-            Отдел продаж
-          </h4>
-          <p>+7 800 555 66 77</p>
-          <p><a href="mailto:hello@mrvk.pro">hello@mrvk.pro</a></p>
-          <p>В рабочие дни:<br>09:00-18:00</p>
-        </div>
-        <div class="supports">
-          <h4 class="supports-title">
-            Поддержка
-          </h4>
-          <p><a href="mailto:support@mrvk.pro">support@mrvk.pro</a></p>
-          <p>Ежедневно:<br>09:00-18:00</p>
+      <div class="questions-container">
+        <div class="question-block">
+          <p class="title">Остались вопросы?</p>
+          <p class="subtitle">Просто позвоните нам!</p>
+          <p class="number">+7 800 555 66 77</p>
+          <p class="supports">Поддержка в соцсетях:</p>
           <div class="icon-group">
             <a href="https://telegram.org/">
               <img src="../assets/images/telegram.svg" alt="telegram">
@@ -544,10 +484,105 @@
               <img src="../assets/images/whatsapp.svg" alt="whatsApp">
             </a>
           </div>
+
+          <button @click="handleShowModal">Подключиться сейчас</button>
         </div>
-        <a href="#" class="arrow-up" :style="arrowUpStyle"></a>
+        <div class="question-bg">
+          <img src="../assets/images/questions-background.png" alt="questionBg">
+        </div>
       </div>
-      <div id="footer" class="container-fluid p-0">
+    </div>
+    <div id="cost-calculation-block" class="container-fluid p-0">
+      <div class="cost-calculation-container">
+        <img class="bg-logo" src="../assets/images/cost-calculate-bg.png" alt="bgLogo">
+        <div class="left-block">
+          <div class="title">
+            Расчет стоимости Муравейника
+          </div>
+          <div class="subtitle">
+            Заполните форму и мы рассчитаем стоимость для вашей компании
+          </div>
+        </div>
+        <form class="right-block" @submit="checkForm2" method="post">
+          <div class="input-block">
+            <div class="smart-name">
+              <input :class="[smartErrors.includes('smart-name') ? 'field-error' : '1']" type="text"
+                     placeholder="Как вас зовут?" v-model="smartName">
+              <p class="error" v-if="smartErrors.includes('smart-name')">
+                Введите ваше имя
+              </p>
+            </div>
+            <div class="smart-number">
+              <input :class="[smartErrors.includes('smart-number') ? 'field-error' : '2']" type="text"
+                     placeholder="+7 (___) ___-__-__" v-model="smartNumber" maxlength="18"
+                     @input="event => smartNumber = formatFullPhone(event.target.value, 'fullNumber')">
+              <p class="error" v-if="smartErrors.includes('smart-number')">
+                Укажите корректный номер телефона
+              </p>
+            </div>
+            <p class="places">Количество точек</p>
+            <div class="count-point">
+              <button type="button" @click="handleCountPlace('minus')">-</button>
+              <input type="text" :value="countPlace" disabled>
+              <button type="button" @click="handleCountPlace('plus')">+</button>
+            </div>
+          </div>
+          <button class="calculate" type="submit">Узнать стоимость</button>
+          <p class="calculate-description">Нажимая на кнопку, вы соглашаетесь на <a href="#">обработку персональных
+            данных</a></p>
+        </form>
+      </div>
+    </div>
+    <!--Контакты-->
+    <div id="contacts" class="container-fluid">
+      <div class="content container-fluid p-0">
+        <div class="content-container">
+          <div class="contacts-title">
+            <div class="title">
+              Контакты
+            </div>
+          </div>
+          <div class="contacts-items">
+            <div class="ant-hill">
+              <h4 class="ant-hill-title">
+                Муравейник
+              </h4>
+              <p>
+                Программа управления<br>и контроля торговой сети
+              </p>
+              <p>
+                г. Екатеринбург<br>ул. Сулимова д. 50, оф. 0.28
+              </p>
+            </div>
+            <div class="sales">
+              <h4 class="sales-title">
+                Отдел продаж
+              </h4>
+              <p>+7 800 555 66 77</p>
+              <p><a href="mailto:hello@mrvk.pro">hello@mrvk.pro</a></p>
+              <p>В рабочие дни:<br>09:00-18:00</p>
+            </div>
+            <div class="supports">
+              <h4 class="supports-title">
+                Поддержка
+              </h4>
+              <p><a href="mailto:support@mrvk.pro">support@mrvk.pro</a></p>
+              <p>Ежедневно:<br>09:00-18:00</p>
+              <div class="icon-group">
+                <a href="https://telegram.org/">
+                  <img src="../assets/images/telegram.svg" alt="telegram">
+                </a>
+                <a href="https://www.whatsapp.com/">
+                  <img src="../assets/images/whatsapp.svg" alt="whatsApp">
+                </a>
+              </div>
+            </div>
+            <a href="#" class="arrow-up" :style="arrowUpStyle"></a>
+          </div>
+        </div>
+
+      </div>
+      <div id="footer" class="container-fluid">
         <pre />
         <div class="copy">
           <span>© 2024 «Муравейник»</span>
@@ -566,9 +601,9 @@
       </template>
       <template #body>
         <form method="post" @submit="checkForm">
-          <span>
+          <p>
             Заполните форму, и мы свяжемся<br>с Вами в ближайшее время.
-          </span>
+          </p>
           <div :class="['name', errors.includes('name') ? 'error-field' : '']">
             <input type="text" placeholder="Ваше имя" v-model="name">
             <p class="error" v-if="errors.includes('name')">
@@ -713,41 +748,41 @@ const usages = [
   {
     id: '01',
     title: 'Шаг 1',
-    description: 'Создание чек-листов под ваши задачи',
+    description: 'Создание чек-листов<br>под ваши задачи',
     slide: {
-      desc1: 'Создавайте чек-листы для проверки любых процессов в вашей компании',
+      desc1: 'Создавайте чек-листы для проверки\nлюбых процессов в вашей компании.',
       srcImg: 'images/usage-slider/01.png',
-      desc2: 'Удобный и гибкий конструктор чек-листов подойдет под любые задачи'
+      desc2: 'Удобный и гибкий конструктор чек-\nлистов подойдет под любые задачи.'
     }
   },
   {
     id: '02',
     title: 'Шаг 2',
-    description: 'Выполнение проверок торговой сети по чек-листам',
+    description: 'Выполнение проверок<br>торговой сети по чек-листам',
     slide: {
-      desc1: 'Назначайте проверки ваших точек по одному или нескольким чек-листам',
+      desc1: 'Назначайте проверки ваших точек\nпо одному или нескольким чек-листам.',
       srcImg: 'images/usage-slider/02.png',
-      desc2: 'Каждый отчет о проверке подтверждается фотографиями и контролируется по GPS'
+      desc2: 'Каждый отчет о проверке подтверждается\nфотографиями и контролируется по GPS.'
     }
   },
   {
     id: '03',
     title: 'Шаг 3',
-    description: 'Исправление нарушений и создание задач сотрудникам',
+    description: 'Исправление нарушений<br>и создание задач сотрудникам',
     slide: {
-      desc1: 'Автоматически назначайте задачи для исправления нарушений',
+      desc1: 'Автоматически назначайте задачи для\nисправления нарушений.',
       srcImg: 'images/usage-slider/03.png',
-      desc2: 'Вовлекайте сотрудников на местах в решение проблем'
+      desc2: 'Вовлекайте сотрудников на местах\nв решение проблем.'
     }
   },
   {
     id: '04',
     title: 'Шаг 4',
-    description: 'Анализ качества работы по всей сети',
+    description: 'Анализ качества<br>работы по всей сети',
     slide: {
-      desc1: 'Находите лучшие и худшие подразделения в структуре компании',
+      desc1: 'Находите лучшие и худшие\nподразделения.',
       srcImg: 'images/usage-slider/04.png',
-      desc2: 'Создавайте новые ключевые показатели для повышения эффективности'
+      desc2: 'Создавайте новые ключевые показатели\nдля повышения эффективности.'
     }
   }
 ]
@@ -885,7 +920,7 @@ window.addEventListener('scroll', () => {
   const y = window.pageYOffset
   const switcherInput = document.querySelector('.switcher__input')
   if (switcherInput) {
-    switcherInput.checked = y >= 200
+    switcherInput.checked = y >= 150
   }
 })
 
