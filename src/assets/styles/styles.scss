@@ -830,7 +830,7 @@ body {
 
             .orange-container {
                 display: flex;
-                width: 1000px;
+                width: 1111px;
                 align-items: center;
                 justify-content: space-between;
                 flex-wrap: wrap;
@@ -861,12 +861,13 @@ body {
                     padding: 10px 37px;
                     background: $white;
                     border-radius: 47px;
+                    margin-right: 60px;
 
                     span {
                         font-family: 'GolosTextRegular', sans-serif;
                         font-size: 14px;
                         color: $black-color;
-                        margin-right: 42px;
+                        margin-right: 29px;
                     }
 
                     img {
