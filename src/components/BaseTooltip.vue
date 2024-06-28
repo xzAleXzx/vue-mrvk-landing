@@ -1,9 +1,11 @@
 <template>
   <div>
+    <div v-if="isMobile" class="gray-element"></div>
     <div :class="['custom-relative', active]"
          :style="`--orange-bg: url(${getImgUrl('images/possibilities/possibilities-circle/orange.png')}); --blue-bg: url(${getImgUrl('images/possibilities/possibilities-circle/blue.png')})`">
       <slot />
     </div>
+    <div v-if="isMobile" class="item-description">{{ itemDescription }}</div>
     <div :class="propsClass" ref="targetElement">
       <div>
         <span>{{ title }}</span>
@@ -25,7 +27,9 @@ export default {
     desc2: String,
     propsClass: [String, { active: Boolean }],
     active: { active: Boolean },
-    getImgUrl: Function
+    getImgUrl: Function,
+    itemDescription: String,
+    isMobile: Boolean
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside)

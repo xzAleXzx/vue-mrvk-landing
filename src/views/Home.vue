@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid m-0 p-0">
     <!--Хедер-->
-    <div id="header" class="header-height container-fluid p-0">
+    <div id="header" class="header-height container-fluid pr-4 pl-4">
       <div class="navbar-mrvk-logo">
         <a href="#" class="navbar-mrvk-logo__link">
           <div class="navbar-mrvk-logo__svg">
@@ -44,8 +44,8 @@
       </div>
     </div>
     <!--Главный Блок-->
-    <div id="home-page">
-      <div class="mrvk-main-wrapper container p-0">
+    <div id="home-page" class="container-fluid pr-4 pl-4">
+      <div class="mrvk-main-wrapper">
         <div class="left">
           <div class="title">
             <span>Муравейник</span>
@@ -64,11 +64,11 @@
           </div>
           <div class="mrvk-main-wrapper-list">
             <ul>
-              <li><span>Контролируйте качество работы</span>торговой сети</li>
-              <li><span>Анализируйте работу</span>торговых точек</li>
-              <li><span>Повышайте эффективность</span>работы сотрудников</li>
-              <li><span>Выявляйте слабые места</span>в бизнес-процессах</li>
-              <li><span>Снижайте нагрузку</span>на управленческий персонал</li>
+              <li><span>Контролируйте качество работы</span> торговой сети</li>
+              <li><span>Анализируйте работу</span> торговых точек</li>
+              <li><span>Повышайте эффективность</span> работы сотрудников</li>
+              <li><span>Выявляйте слабые места</span> в бизнес-процессах</li>
+              <li><span>Снижайте нагрузку</span> на управленческий персонал</li>
             </ul>
           </div>
         </div>
@@ -79,58 +79,57 @@
             <img class="diagram-cover__image" src="../assets/images/diagram.svg" alt="bgCover">
           </div>
           <div class="right-side"></div>
-
         </div>
       </div>
 
-      <div class="mrvk-retail-block container p-0">
+      <div class="mrvk-retail-block container-fluid pl-4 pr-4">
         <div class="mrvk-retail-block__title">
-          Для кого подойдет<span>Муравейник</span>
+          Для кого подойдет <span>Муравейник</span>
         </div>
         <div class="mrvk-retail-block__subtitle">
           Любые розничные сетевые точки в сфере торговли и услуг
         </div>
-      </div>
-      <div class="mrvk-retail-slider container p-0">
-        <swiper
-          :slides-per-view="5.3"
-          :space-between="11"
-          :loop="true"
-          :autoplay="{
+        <div class="mrvk-retail-slider container p-0">
+          <swiper
+            :space-between="11"
+            :loop="true"
+            slides-per-view="auto"
+            :autoplay="{
                 delay: 2500,
                 disableOnInteraction: false,
           }"
-          :navigation="{ nextEl: '.retail-button-right', prevEl: '.retail-button-left' }"
-          :modules="modules"
-          class="swiper-retail"
-        >
-          <swiper-slide v-for="(retailer, key) in retailers" :key="key" class="mrvk-retail-card">
-            <img class="retail-img" :src="`${getImgUrl(retailer.srcImg)}`" alt="retailerImg" />
-            <div class="retailer-title">
-              {{ retailer.title }}
+            :navigation="{ nextEl: '.retail-button-right', prevEl: '.retail-button-left' }"
+            :modules="modules"
+            class="swiper-retail"
+          >
+            <swiper-slide v-for="(retailer, key) in retailers" :key="key" class="mrvk-retail-card">
+              <img class="retail-img" :src="`${getImgUrl(retailer.srcImg)}`" alt="retailerImg" />
+              <div class="retailer-title">
+                {{ retailer.title }}
+              </div>
+              <div class="retailer-subtitle">
+                {{ retailer.subtitle }}
+              </div>
+              <button class="retail-button" @click="handleShowModal">
+                <span> Попробовать бесплатно</span>
+                <img src="../assets/images/link-arrow.svg" alt="linkArrow">
+              </button>
+            </swiper-slide>
+            <div class="retail-button-group">
+              <button type="button" class="retail-button-left" @click="swiperPrevSlide">
+                <img :src="srcOnePx" :style="sliderArrowStyle" alt="leftArrow" />
+              </button>
+              <button type="button" class="retail-button-right" @click="swiperNextSlide">
+                <img :src="srcOnePx" :style="sliderArrowStyle" alt="rightArrow" />
+              </button>
             </div>
-            <div class="retailer-subtitle">
-              {{ retailer.subtitle }}
-            </div>
-            <button class="retail-button" @click="handleShowModal">
-              <span> Попробовать бесплатно</span>
-              <img src="../assets/images/link-arrow.svg" alt="linkArrow">
-            </button>
-          </swiper-slide>
-          <div class="retail-button-group">
-            <button type="button" class="retail-button-left" @click="swiperPrevSlide">
-              <img :src="srcOnePx" :style="sliderArrowStyle" alt="leftArrow" />
-            </button>
-            <button type="button" class="retail-button-right" @click="swiperNextSlide">
-              <img :src="srcOnePx" :style="sliderArrowStyle" alt="rightArrow" />
-            </button>
-          </div>
-          <div class="swiper-pagination"></div>
-        </swiper>
+            <div class="swiper-pagination"></div>
+          </swiper>
+        </div>
       </div>
     </div>
     <!--Как это работает-->
-    <div id="usage" class="container-fluid p-0">
+    <div id="usage" class="container-fluid pr-4 pl-4">
       <img class="background-lines" src="../assets/images/background-lines.svg" alt="backgroundLines">
       <div class="right-usage-block">
         <div class="usage-title">
@@ -150,15 +149,13 @@
             }"
             :loop="true"
             :autoplay="{
-              delay: 3000,
+              delay: 113000,
               disableOnInteraction: false,
             }"
             :modules="modules"
             class="swiper-usage"
           >
             <div class="paginator"></div>
-            <div class="left-side-text">
-            </div>
             <swiper-slide class="mrvk-usage-card" v-for="(usage, key) in usages" :key="key">
               <img class="usage-img" :src="`${getImgUrl(usage.slide.srcImg)}`" alt="usageImg">
               <div class="slide-block">
@@ -172,10 +169,38 @@
               </div>
             </swiper-slide>
           </swiper>
+
+          <swiper
+            :slidesPerView="1"
+            :pagination="{
+              el: '.paginator',
+              clickable: true,
+            }"
+            :loop="true"
+            :autoplay="{
+              delay: 113000,
+              disableOnInteraction: false,
+            }"
+            :modules="modules"
+            class="swiper-usage-mobile"
+          >
+            <div class="paginator"></div>
+            <swiper-slide class="mrvk-usage-card" v-for="(usage, key) in usages" :key="key">
+              <img class="usage-img" :src="`${getImgUrl(usage.slide.srcImg)}`" alt="usageImg">
+              <div class="slide-block">
+                <div class="slide-desc1">
+                  <p>{{ usage.slide.desc1 }}</p>
+                </div>
+                <div class="slide-desc2">
+                  <p>{{ usage.slide.desc2 }}</p>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
         </div>
         <div class="usage-function-block">
           <div class="title">
-            Все функции для контроля работы торговой сети собраны<br>в одном универсальном приложении
+            Все функции для контроля работы торговой сети собраны в одном универсальном приложении
           </div>
           <div class="usage-function-block-template">
             <div class="percent-block">
@@ -230,7 +255,7 @@
                 <span>с полным функционалом</span>
               </div>
               <button class="try-now" id="show-modal" @click="handleShowModal">
-                <span>Попробовать прямо сейчас</span>
+                <span class="try-now-text">Попробовать прямо сейчас</span>
                 <img src="../assets/images/right-arrow-black.svg" alt="rightArrow">
               </button>
             </div>
@@ -239,7 +264,7 @@
       </div>
     </div>
     <!--Возможности-->
-    <div id="possibilities" class="container-fluid p-0" @click.self="activeIndex=''">
+    <div id="possibilities" class="container-fluid pr-4 pl-4">
       <div class="left-possibilities-block">
         <div class="possibilities-title">
           <span>Возможности</span>
@@ -306,7 +331,8 @@
       </div>
       <div class="triangle-block">
         <p>
-          Всё для контроля работы<br>компании<span>в одном сервисе</span>
+          <span class="start-line">Всё для контроля работы</span><br>компании <span
+          class="end-line">в одном сервисе</span>
         </p>
         <div class="triangle"></div>
       </div>
@@ -329,17 +355,31 @@
               <img :class="`${item.name}-img`" :src="`${getImgUrl(item.imgSrc)}`" :alt="`${item.name}`">
             </BaseTooltip>
           </div>
-          <div class="circle-description">
-            <p class="paper">Полный уход от бумажных отчетов</p>
-            <p class="arrows">Все данные <br> в одном месте</p>
-            <p class="time">Экономия времени</p>
-            <p class="settings">Контроль качества</p>
-            <p class="exclamation">Работа <br>с нарушениями</p>
-            <p class="check">Достоверность данных</p>
-            <p class="diagram">Простая <br>и понятная аналитика</p>
+          <div class="circle-description" v-for="item in circleItems" :key="item.id">
+            <p :class="item.name">{{ item.itemDescription }}</p>
           </div>
         </div>
       </div>
+
+      <div class="all-for-control">
+        <div :class="['circle-icon', item.name]" v-for="(item, index) in circleItems" :key="item.id">
+          <BaseTooltip
+            :props-class="['custom-tooltip', item.name + '-tooltip', {'active': activeIndex === index}]"
+            :title="item.title"
+            :desc1="item.desc1"
+            :desc2="item.desc2"
+            :active="{'active': activeIndex === index }"
+            :item-description="item.itemDescription"
+            :is-mobile="true"
+            :get-img-url="getImgUrl"
+            @close="handleCloseTooltip"
+            @click="setActive(index)"
+          >
+            <img :class="`${item.name}-img`" :src="`${getImgUrl(item.imgSrc)}`" :alt="`${item.name}`">
+          </BaseTooltip>
+        </div>
+      </div>
+
       <div class="right-difficulties-block">
         <div class="difficulties-title">С какими сложностями сталкивались<br>наши клиенты<span>до подключения Муравейника</span>
         </div>
@@ -470,7 +510,7 @@
       <div class="questions-right-lines-bg">
         <img src="../assets/images/questions-right-lines-bg.png" alt="questionsRightBg">
       </div>
-      <div class="questions-container">
+      <div class="questions-container container-fluid pr-4 pl-4">
         <div class="question-block">
           <p class="title">Остались вопросы?</p>
           <p class="subtitle">Просто позвоните нам!</p>
@@ -492,7 +532,7 @@
         </div>
       </div>
     </div>
-    <div id="cost-calculation-block" class="container-fluid p-0">
+    <div id="cost-calculation-block" class="container-fluid pr-4 pl-4">
       <div class="cost-calculation-container">
         <img class="bg-logo" src="../assets/images/cost-calculate-bg.png" alt="bgLogo">
         <div class="left-block">
@@ -790,6 +830,7 @@ const usages = [
 const circleItems = [
   {
     id: 1,
+    itemDescription: 'Полный уход\n от бумажных\n отчетов',
     name: 'paper',
     title: 'Быстрая постановка задач, обработка результата и анализ данных.',
     desc1: 'Отсутствие бумажной волокиты и сбора данных вручную.',
@@ -798,6 +839,7 @@ const circleItems = [
   },
   {
     id: 2,
+    itemDescription: 'Все данные\n в одном месте',
     name: 'arrows',
     title: 'Ничего не пропадет и не потеряется.',
     desc1: 'Данные за весь период работы доступны в любой момент.',
@@ -806,6 +848,7 @@ const circleItems = [
   },
   {
     id: 3,
+    itemDescription:  'Экономия\n времени',
     name: 'time',
     title: 'Быстрая постановка задач сотрудникам.',
     desc1: 'Простой контроль и обработка результатов работы.',
@@ -814,6 +857,7 @@ const circleItems = [
   },
   {
     id: 4,
+    itemDescription: 'Контроль качества',
     name: 'settings',
     title: 'Вы сами решаете какие процессы хотите контролировать:',
     desc1: 'качество обслуживания, пожарную безопасность, состояние оборудования или что-то еще?',
@@ -822,6 +866,7 @@ const circleItems = [
   },
   {
     id: 5,
+    itemDescription: 'Работа\n с нарушениями',
     name: 'exclamation',
     title: 'Наглядно видно устранение всех выявленных нарушений.',
     desc1: 'Сотрудники на местах вовлечены в процесс.',
@@ -830,6 +875,7 @@ const circleItems = [
   },
   {
     id: 6,
+    itemDescription: 'Достоверность\n данных',
     name: 'check',
     title: 'Полный контроль поступающих данных.',
     desc1: 'Исключены махинации, ошибки и человеческий фактор.',
@@ -838,6 +884,7 @@ const circleItems = [
   },
   {
     id: 7,
+    itemDescription: 'Простая\n и понятная\n аналитика',
     name: 'diagram',
     title: 'Мы собрали все самые важные метрики в одном месте. ',
     desc1: 'Поиск необходимой информации занимает минимум времени.',
@@ -914,7 +961,7 @@ const accountSliderSrcs = [
   {
     imgSrc: 'images/possibilities/personal-web-account-slider/phone-2.png'
   }
-]
+];
 
 window.addEventListener('scroll', () => {
   const y = window.pageYOffset
@@ -954,14 +1001,21 @@ export default defineComponent({
       leftArrowWhite: 'images/left-arrow-white.svg',
       rightArrowWhite: 'images/right-arrow-white.svg',
       leftArrowBlue: 'images/left-arrow-blue.svg',
-      rightArrowBlue: 'images/right-arrow-blue.svg'
+      rightArrowBlue: 'images/right-arrow-blue.svg',
+      windowWidth: 0
     }
   },
   mounted() {
-    const elements = document.querySelectorAll('.swiper-pagination-bullet')
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].innerHTML = `<div class="title">${usages[i].title}</div><div class="description">${usages[i].description}</div>`
-    }
+    this.windowWidth = window.innerWidth
+
+    this.fillSliderData(this.windowWidth)
+
+  },
+  created() {
+    window.addEventListener('resize', this.resizeHandler)
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.resizeHandler)
   },
   methods: {
     setActive(index) {
@@ -1065,31 +1119,62 @@ export default defineComponent({
     handleShowModal() {
       this.showModal = true
       document.querySelector('body').style.overflow = 'hidden'
+      document.querySelector('body').style.marginRight = 'calc(100vw - 99.2%)'
     },
     handleShowModal2() {
       this.showModal2 = true
       document.querySelector('body').style.overflow = 'hidden'
+      document.querySelector('body').style.marginRight = 'calc(100vw - 99.2%)'
 
     },
     handleCloseModal() {
       this.showModal = false
       document.querySelector('body').style.overflow = ''
+      document.querySelector('body').style.marginRight = ''
     },
     handleCloseModal2() {
       this.showModal2 = false
       document.querySelector('body').style.overflow = ''
+      document.querySelector('body').style.marginRight = ''
 
     },
     handleShowBurger() {
       this.showBurger = true
       document.querySelector('body').style.overflow = 'hidden'
+      document.querySelector('body').style.marginRight = 'calc(100vw - 99.2%)'
     },
     handleCloseBurger() {
       this.showBurger = false
       document.querySelector('body').style.overflow = ''
+      document.querySelector('body').style.marginRight = ''
     },
     getImgUrl(img) {
       return new URL(`/src/assets/${img}`, import.meta.url)
+    },
+    fillSliderData(width) {
+      if (width <= 850) {
+        const swiperMobile = document.querySelector('.swiper-usage-mobile')
+        const swiperPaginatorMobile = swiperMobile.querySelector('.paginator').children
+        for (let i = 0; i < swiperPaginatorMobile.length; i++) {
+          swiperPaginatorMobile[i].innerHTML = `<div class="title">${usages[i].title}</div>`
+        }
+
+        const orangeButton = document.querySelector('.try-now-text')
+        orangeButton.innerHTML = 'Попробовать бесплатно'
+      } else {
+        const swiper = document.querySelector('.swiper-usage')
+        const swiperPaginator = swiper.querySelector('.paginator').children
+        for (let i = 0; i < swiperPaginator.length; i++) {
+          swiperPaginator[i].innerHTML = `<div class="title">${usages[i].title}</div><div class="description">${usages[i].description}</div>`
+        }
+
+        const orangeButton = document.querySelector('.try-now-text')
+        orangeButton.innerHTML = 'Попробовать прямо сейчас'
+      }
+    },
+    resizeHandler() {
+      this.windowWidth = window.innerWidth
+      this.fillSliderData(this.windowWidth)
     }
   },
   computed: {
