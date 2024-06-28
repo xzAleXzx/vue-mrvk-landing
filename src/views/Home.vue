@@ -130,7 +130,9 @@
     </div>
     <!--Как это работает-->
     <div id="usage" class="container-fluid pr-4 pl-4">
-      <img class="background-lines" src="../assets/images/background-lines.svg" alt="backgroundLines">
+      <div class="background-lines">
+        <img src="../assets/images/background-lines.png" alt="backgroundLines">
+      </div>
       <div class="right-usage-block">
         <div class="usage-title">
           <span>Как</span>
@@ -149,7 +151,7 @@
             }"
             :loop="true"
             :autoplay="{
-              delay: 113000,
+              delay: 123000,
               disableOnInteraction: false,
             }"
             :modules="modules"
@@ -362,21 +364,20 @@
       </div>
 
       <div class="all-for-control">
-        <div :class="['circle-icon', item.name]" v-for="(item, index) in circleItems" :key="item.id">
-          <BaseTooltip
-            :props-class="['custom-tooltip', item.name + '-tooltip', {'active': activeIndex === index}]"
+        <div :class="['popup-items-mobile', item.name]" v-for="(item, index) in circleItems" :key="item.id">
+          <BaseTooltipMobile
+            :props-class="['custom-tooltip-mobile', item.name + '-tooltip-mobile', {'active': activeIndexMobile === index}]"
             :title="item.title"
             :desc1="item.desc1"
             :desc2="item.desc2"
-            :active="{'active': activeIndex === index }"
+            :active="{'active': activeIndexMobile === index }"
             :item-description="item.itemDescription"
-            :is-mobile="true"
             :get-img-url="getImgUrl"
-            @close="handleCloseTooltip"
-            @click="setActive(index)"
+            @close-mobile="handleCloseTooltip"
+            @click="setActiveMobile(index)"
           >
-            <img :class="`${item.name}-img`" :src="`${getImgUrl(item.imgSrc)}`" :alt="`${item.name}`">
-          </BaseTooltip>
+            <img :class="`tooltip-img ${item.name}-img`" :src="`${getImgUrl(item.imgSrcMobile)}`" :alt="`${item.name}`">
+          </BaseTooltipMobile>
         </div>
       </div>
 
@@ -412,11 +413,10 @@
           :slides-per-view="2"
           :slidesPerGroup="2"
           :autoplay="{
-                delay: 4000,
+                delay: 114000,
                 disableOnInteraction: false,
           }"
           :loop="true"
-          :slidesOffsetBefore="5"
           :navigation="{ nextEl: '.account-button-right', prevEl: '.account-button-left' }"
           :modules="modules"
           class="swiper-account"
@@ -451,7 +451,7 @@
               <img src="../assets/images/possibilities/easy-start-section/01.svg" alt="copy">
             </div>
             <p>
-              <span>Простота внедрения</span> Наши специалисты самостоятельно настроят<br>все необходимые процессы для
+              <span>Простота внедрения</span> Наши специалисты самостоятельно настроят все необходимые процессы для
               запуска.
             </p>
           </div>
@@ -460,7 +460,7 @@
               <img src="../assets/images/possibilities/easy-start-section/02.svg" alt="copy">
             </div>
             <p>
-              <span>Экономия на оборудовании</span> Для работы потребуются<br>только мобильные телефоны сотрудников.
+              <span>Экономия на оборудовании</span> Для работы потребуются только мобильные телефоны сотрудников.
             </p>
           </div>
           <div class="easy-start-section">
@@ -468,8 +468,8 @@
               <img src="../assets/images/possibilities/easy-start-section/03.svg" alt="copy">
             </div>
             <p>
-              <span>Гарантия результата</span> Мы предлагаем бесплатный тестовый период, до тех пор,<br>пока вы не
-              убедитесь, что это работает.
+              <span>Гарантия результата</span> Мы предлагаем бесплатный тестовый период, до тех пор,
+              пока вы не убедитесь, что это работает.
             </p>
           </div>
           <div class="easy-start-section">
@@ -477,8 +477,8 @@
               <img src="../assets/images/possibilities/easy-start-section/04.svg" alt="copy">
             </div>
             <p>
-              <span>Облачное хранение данных</span> Гарантированная сохранность полученных данных. Доступность 24/7.<br>Отсутствие
-              необходимости использования сервера компании.
+              <span>Облачное хранение данных</span> Гарантиия сохранности данных. Доступность 24/7.
+              Не нужно использования сервера вашей компании.
             </p>
           </div>
           <div class="easy-start-section">
@@ -487,7 +487,7 @@
             </div>
             <p>
               <span>Полная поддержка</span> Наш продукт не нужно настраивать и поддерживать силами ваших
-              специалистов.<br>Мы берем все заботы на себя.
+              специалистов. Мы берем все заботы на себя.
             </p>
           </div>
           <div class="easy-start-section">
@@ -495,8 +495,8 @@
               <img src="../assets/images/possibilities/easy-start-section/06.svg" alt="copy">
             </div>
             <p>
-              <span>Любые интеграции и доработки</span> Готовы реализовать интеграцию данных с любыми вашими
-              системами.<br>Возможна доработка продукта под любые задачи.
+              <span>Любые интеграции и доработки</span> Готовы реализовать интеграцию данных с любыми вашими системами.
+              <br> Возможна доработка продукта под любые задачи.
             </p>
           </div>
         </div>
@@ -731,6 +731,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import BaseTooltip from '@/components/BaseTooltip.vue'
 import modal from '@/components/Modal.vue'
 import burger from '@/components/BurgerMenu.vue'
+import BaseTooltipMobile from '@/components/BaseTooltipMobile.vue'
 
 const showModal = ref(false)
 const showModal2 = ref(false)
@@ -835,7 +836,8 @@ const circleItems = [
     title: 'Быстрая постановка задач, обработка результата и анализ данных.',
     desc1: 'Отсутствие бумажной волокиты и сбора данных вручную.',
     desc2: '',
-    imgSrc: 'images/possibilities/possibilities-circle/01.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/01.svg',
+    imgSrcMobile: 'images/possibilities/possibilities-tooltip-mobile/01.svg'
   },
   {
     id: 2,
@@ -844,7 +846,8 @@ const circleItems = [
     title: 'Ничего не пропадет и не потеряется.',
     desc1: 'Данные за весь период работы доступны в любой момент.',
     desc2: 'Видна вся ситуация в динамике.',
-    imgSrc: 'images/possibilities/possibilities-circle/02.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/02.svg',
+    imgSrcMobile: 'images/possibilities/possibilities-tooltip-mobile/02.svg'
   },
   {
     id: 3,
@@ -853,7 +856,8 @@ const circleItems = [
     title: 'Быстрая постановка задач сотрудникам.',
     desc1: 'Простой контроль и обработка результатов работы.',
     desc2: '',
-    imgSrc: 'images/possibilities/possibilities-circle/03.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/03.svg',
+    imgSrcMobile: 'images/possibilities/possibilities-tooltip-mobile/03.svg'
   },
   {
     id: 4,
@@ -862,7 +866,8 @@ const circleItems = [
     title: 'Вы сами решаете какие процессы хотите контролировать:',
     desc1: 'качество обслуживания, пожарную безопасность, состояние оборудования или что-то еще?',
     desc2: '',
-    imgSrc: 'images/possibilities/possibilities-circle/04.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/04.svg',
+    imgSrcMobile: 'images/possibilities/possibilities-tooltip-mobile/04.svg'
   },
   {
     id: 5,
@@ -871,7 +876,8 @@ const circleItems = [
     title: 'Наглядно видно устранение всех выявленных нарушений.',
     desc1: 'Сотрудники на местах вовлечены в процесс.',
     desc2: '',
-    imgSrc: 'images/possibilities/possibilities-circle/05.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/05.svg',
+    imgSrcMobile: 'images/possibilities/possibilities-tooltip-mobile/05.svg'
   },
   {
     id: 6,
@@ -880,7 +886,8 @@ const circleItems = [
     title: 'Полный контроль поступающих данных.',
     desc1: 'Исключены махинации, ошибки и человеческий фактор.',
     desc2: 'Проверки контролируются по GPS, все отчеты подтверждены фотографиями.',
-    imgSrc: 'images/possibilities/possibilities-circle/06.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/06.svg',
+    imgSrcMobile: 'images/possibilities/possibilities-tooltip-mobile/06.svg'
   },
   {
     id: 7,
@@ -889,7 +896,8 @@ const circleItems = [
     title: 'Мы собрали все самые важные метрики в одном месте. ',
     desc1: 'Поиск необходимой информации занимает минимум времени.',
     desc2: 'Полная аналитическая отчетность для руководителя.',
-    imgSrc: 'images/possibilities/possibilities-circle/07.svg'
+    imgSrc: 'images/possibilities/possibilities-circle/07.svg',
+    imgSrcMobile: 'images/possibilities/possibilities-tooltip-mobile/07.svg'
   }
 ]
 
@@ -974,6 +982,7 @@ window.addEventListener('scroll', () => {
 export default defineComponent({
   name: 'HomeView',
   components: {
+    BaseTooltipMobile,
     modal,
     burger,
     BaseTooltip,
@@ -984,6 +993,7 @@ export default defineComponent({
     return {
       srcOnePx: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
       activeIndex: '',
+      activeIndexMobile: '',
       selectedRole: 'Менеджеры',
       selectedRoleDesc: roles[0].desc,
       countPlace: 1,
@@ -1020,6 +1030,9 @@ export default defineComponent({
   methods: {
     setActive(index) {
       this.activeIndex = index
+    },
+    setActiveMobile(index) {
+      this.activeIndexMobile = index
     },
     handleCloseTooltip(data) {
       this.activeIndex = data
@@ -1152,7 +1165,7 @@ export default defineComponent({
       return new URL(`/src/assets/${img}`, import.meta.url)
     },
     fillSliderData(width) {
-      if (width <= 850) {
+      if (width <= 890) {
         const swiperMobile = document.querySelector('.swiper-usage-mobile')
         const swiperPaginatorMobile = swiperMobile.querySelector('.paginator').children
         for (let i = 0; i < swiperPaginatorMobile.length; i++) {

@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <div :class="['custom-relative', active]"
-         :style="`--orange-bg: url(${getImgUrl('images/possibilities/possibilities-circle/orange.png')}); --blue-bg: url(${getImgUrl('images/possibilities/possibilities-circle/blue.png')})`">
+  <div :class="['tooltip-card-mobile', active]" @click="handleClose">
+    <div class="custom-relative-mobile">
+      <div class="gray-element"></div>
       <slot />
+      <div class="item-description-mobile">{{ itemDescription }}</div>
+      <div class="arrow-right-mobile" :style="`--arrow-right-mobile: url(${getImgUrl('images/possibilities/possibilities-tooltip-mobile/arrow-right.svg')})`"></div>
     </div>
     <div :class="propsClass">
       <div>
@@ -10,9 +12,6 @@
         <span>{{ desc1 }}</span>
         <span>{{ desc2 }}</span>
       </div>
-      <button @click.stop="handleClose">
-        <img src="../assets/images/close-icon.svg" alt="closeIcon" />
-      </button>
     </div>
   </div>
 </template>
@@ -26,6 +25,7 @@ export default {
     propsClass: [String, { active: Boolean }],
     active: { active: Boolean },
     getImgUrl: Function,
+    itemDescription: String
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside)
@@ -35,15 +35,15 @@ export default {
   },
   methods: {
     handleClose() {
-      this.$emit('close', {
-        activeIndex: ''
+      this.$emit('closeMobile', {
+        activeIndexMobile: ''
       })
     },
     handleClickOutside(e) {
       if (this.active.active) {
         if (e.target instanceof HTMLElement && !this.$el.contains(e.target)) {
-          this.$emit('close', {
-            activeIndex: ''
+          this.$emit('closeMobile', {
+            activeIndexMobile: ''
           })
         }
       }
